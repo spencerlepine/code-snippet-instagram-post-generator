@@ -1,0 +1,1 @@
+Javascript Tips and Tricks - [Repo](https://github.com/nas5w/javascript-tips-and-tidbits)

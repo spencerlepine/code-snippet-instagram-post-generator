@@ -1,0 +1,86 @@
+name: Build Draft
+
+on:
+  workflow_dispatch:
+    inputs:
+      snippet_name:
+        type: string
+        description: drafts/<snippet_name>
+        required: true
+
+env:
+  tmp_folder: ./generator/src/tmp
+
+jobs:
+
+  generator_snippet:
+    name: "🏗 Generate Snippet"
+    runs-on: ubuntu-latest
+    environment: admin
+
+    steps:
+      - name: "☁️ Check out Git Repository"
+        uses: actions/checkout@v2
+
+      - name: "🔧 Set up Node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: "⚡ Cache dependencies"
+        uses: actions/cache@v3
+        id: modules-cache
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: "📦 Install dependencies"
+        if: steps.modules-cache.outputs.cache-hit != 'true'
+        working-directory: ./generator
+        run: npm install
+
+      - name: "🔧 Create the /tmp folder [GENERATOR]"
+        working-directory: ./generator/src/
+        run: mkdir tmp
+
+      - name: "🔎 Search for snippet draft folder"
+        run: test -d ./drafts/${{ github.event.inputs.snippet_name }}/ && echo "✅ Folder exists" || (echo ❌ Folder not found && exit 1)
+
+      - name: "🔧 Copy snippet draft into /tmp folder"
+        run: cp -r ./drafts/${{ github.event.inputs.snippet_name }}/ ./generator/src/tmp
+
+      - name: "🧪 Generator Snippet Screenshot"
+        working-directory: ./generator
+        run: npm run generate:screenshot --if-present
+
+      - name: "☁️ Upload snippet build to artifacts"
+        uses: actions/upload-artifact@v3
+        with:
+          name: snippet-output-${{ github.sha }}
+          path: ./generator/src/tmp
+          retention-days: 5
+
+      - name: "⬇️ Download the client test coverage report"
+        uses: actions/download-artifact@v3
+        with:
+          name: snippet-output-${{ github.sha }}
+
+      - name: "🔎 Search for snippet output folder"
+        run: test -d ./tmp && echo "✅ Folder exists" || (echo ❌ Folder not found && exit 1)
+
+      - name: "🔧 Copy snippet output into snippets folder"
+        run: cp -r ./tmp ./snippets/${{ github.event.inputs.snippet_name }}
+
+      - name: "🧽 Clean up snippet draft"
+        run: rm -f ./drafts/${{ github.event.inputs.snippet_name }}
+
+      - name: "🚀 Commit ${{ github.event.inputs.snippet_name }} snippet build"
+        run: |
+          git config pull.rebase false
+          git pull
+          git add .
+          git config --global user.name "SpencerBot"
+          git config --global user.email "spencerbot@example.com"
+          git commit -m "🚀 [Automated] Generator new snippet (${{ github.event.inputs.snippet_name }})"
