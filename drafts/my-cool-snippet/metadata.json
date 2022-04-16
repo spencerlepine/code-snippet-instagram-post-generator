@@ -1,0 +1,12 @@
+  {
+    "name": "My Cool Snippet",
+    "description": "test",
+    "hashtags": [
+      "#javascript","#coding","#programming"
+    ],
+    "language": "javascript",
+    "header": {
+      "supertitle": "test",
+      "title": "test"
+    }
+  }
