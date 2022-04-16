@@ -7,7 +7,7 @@ See everything in action in the [demo video](<VIDEO_LINK>).
 [![Demo Youtube Video](./actions-screenshots/youtube_thumbnail.png)](<VIDEO_LINK>)
 
 ## Example Snippet:
-![Example Tidbit](./snippets/example-snippet/javascript-destructuring-snippet.png)
+![Example Tidbit](./snippets/snippet-example/javascript-destructure-snippet.png)
 
 ## Supported Languages:
 See [`languages.json`](./generator/src/constants/languages.json)
@@ -72,7 +72,7 @@ Run the following commands to make snippet draft, and generate a snippet image:
   git clone https://github.com/spencerlepine/code-snippets.git
   cd code-snippets
   mkdir -p ./drafts/my-cool-snippet
-  cp -a ./drafts/example-snippet/. ./drafts/my-cool-snippet
+  cp -a ./drafts/snippet-example/. ./drafts/my-cool-snippet
   # edit "snippet.js" and "metadata.json"
   mkdir -p ./generator/src/tmp
   cp -a ./drafts/my-cool-snippet/. ./generator/src/tmp
@@ -103,7 +103,7 @@ Run the following commands to make snippet draft, and generate a snippet image:
 ```
 
 ### Generates snippet image
-![Example Tidbit](./snippets/example-snippet/javascript-destructuring-snippet.png)
+![Example Tidbit](./snippets/snippet-example/javascript-destructure-snippet.png)
 
 ### Saves output metadata
 ```diff
