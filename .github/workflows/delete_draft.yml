@@ -1,0 +1,60 @@
+name: Delete Draft Snippet
+
+on:
+  workflow_dispatch:
+    inputs:
+      snippet_name:
+        type: string
+        description: drafts/<snippet_folder_name>
+        required: true
+
+jobs:
+
+  draft_delete:
+    name: "🗑️ Delete Draft Snippet"
+    runs-on: ubuntu-latest
+    environment: admin
+
+    steps:
+      - name: "🚧 Test input with regex"
+        uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: ${{ github.event.inputs.snippet_name }}
+          regex: '[a-z-]'
+
+      - name: "🚫 Deny invalid snippet name input"
+        if: ${{ steps.regex-match.outputs.match == '' }}
+        run: |
+          echo "Invalid snippet name input (example: my-cool-snippet)"
+          exit 1
+
+      - name: "☁️ Check out Git Repository"
+        uses: actions/checkout@v2
+
+      - name: "🚧 Verify snippet exists folder"
+        run: test -d ./drafts/${{ github.event.inputs.snippet_name }}/ && echo "✅ Folder exists" || (echo ❌ Folder not found && exit 1)
+
+      - name: "🚗 Move snippet folder to trash"
+        run: |
+          mkdir -p trash
+          mkdir -p ./trash/${{ github.event.inputs.snippet_name }}
+          cp -a ./drafts/${{ github.event.inputs.snippet_name }}/. ./trash/${{ github.event.inputs.snippet_name }}
+
+      - name: "❌ Delete the snippet folder"
+        run: |
+          rm -rf ./drafts/${{ github.event.inputs.snippet_name }}
+
+      - name: "🚀 Commit [${{ github.event.inputs.snippet_name }}] snippet DELETION"
+        run: |
+          git config pull.rebase false
+          git pull
+          git add .
+          git config --global user.name "DraftDeleteBot"
+          git config --global user.email "spencerbot@example.com"
+          git commit -m "❌ [Automated] Deleted draft snippet (${{ github.event.inputs.snippet_name }})"
+
+      - name: "🚀 Push changes to repo"
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,403 @@
+name: Upload Draft Snippet
+
+on:
+  workflow_dispatch:
+    inputs:
+      snippet:
+        type: string
+        description: Code Snippet (string with \n newline character)
+        required: true
+      name:
+        type: string
+        description: Snippet Name (eg. My Cool Snippet)
+        required: true
+      language:
+        type: choice
+        description: Language (eg. javascript)
+        required: true
+        options:
+        - abap
+        - abnf
+        - actionscript
+        - ada
+        - agda
+        - al
+        - antlr4
+        - apacheconf
+        - apex
+        - apl
+        - applescript
+        - aql
+        - arduino
+        - arff
+        - asciidoc
+        - asm6502
+        - asmatmel
+        - aspnet
+        - autohotkey
+        - autoit
+        - avisynth
+        - avroIdl
+        - bash
+        - basic
+        - batch
+        - bbcode
+        - bicep
+        - birb
+        - bison
+        - bnf
+        - brainfuck
+        - brightscript
+        - bro
+        - bsl
+        - c
+        - cfscript
+        - chaiscript
+        - cil
+        - clike
+        - clojure
+        - cmake
+        - cobol
+        - coffeescript
+        - concurnas
+        - coq
+        - cpp
+        - crystal
+        - csharp
+        - cshtml
+        - csp
+        - cssExtras
+        - css
+        - csv
+        - cypher
+        - d
+        - dart
+        - dataweave
+        - dax
+        - dhall
+        - diff
+        - django
+        - dnsZoneFile
+        - docker
+        - dot
+        - ebnf
+        - editorconfig
+        - eiffel
+        - ejs
+        - elixir
+        - elm
+        - erb
+        - erlang
+        - etlua
+        - excelFormula
+        - factor
+        - falselang
+        - firestoreSecurityRules
+        - flow
+        - fortran
+        - fsharp
+        - ftl
+        - gap
+        - gcode
+        - gdscript
+        - gedcom
+        - gherkin
+        - git
+        - glsl
+        - gml
+        - gn
+        - goModule
+        - go
+        - graphql
+        - groovy
+        - haml
+        - handlebars
+        - haskell
+        - haxe
+        - hcl
+        - hlsl
+        - hoon
+        - hpkp
+        - hsts
+        - http
+        - ichigojam
+        - icon
+        - icuMessageFormat
+        - idris
+        - iecst
+        - ignore
+        - inform7
+        - ini
+        - io
+        - j
+        - java
+        - javadoc
+        - javadoclike
+        - javascript
+        - javastacktrace
+        - jexl
+        - jolie
+        - jq
+        - jsExtras
+        - jsTemplates
+        - jsdoc
+        - json
+        - json5
+        - jsonp
+        - jsstacktrace
+        - jsx
+        - julia
+        - keepalived
+        - keyman
+        - kotlin
+        - kumir
+        - kusto
+        - latex
+        - latte
+        - less
+        - lilypond
+        - liquid
+        - lisp
+        - livescript
+        - llvm
+        - log
+        - lolcode
+        - lua
+        - magma
+        - makefile
+        - markdown
+        - markupTemplating
+        - markup
+        - matlab
+        - maxscript
+        - mel
+        - mermaid
+        - mizar
+        - mongodb
+        - monkey
+        - moonscript
+        - n1ql
+        - n4js
+        - nand2tetrisHdl
+        - naniscript
+        - nasm
+        - neon
+        - nevod
+        - nginx
+        - nim
+        - nix
+        - nsis
+        - objectivec
+        - ocaml
+        - opencl
+        - openqasm
+        - oz
+        - parigp
+        - parser
+        - pascal
+        - pascaligo
+        - pcaxis
+        - peoplecode
+        - perl
+        - phpExtras
+        - php
+        - phpdoc
+        - plsql
+        - powerquery
+        - powershell
+        - processing
+        - prolog
+        - promql
+        - properties
+        - protobuf
+        - psl
+        - pug
+        - puppet
+        - pure
+        - purebasic
+        - purescript
+        - python
+        - q
+        - qml
+        - qore
+        - qsharp
+        - r
+        - racket
+        - reason
+        - regex
+        - rego
+        - renpy
+        - rest
+        - rip
+        - roboconf
+        - robotframework
+        - ruby
+        - rust
+        - sas
+        - sass
+        - scala
+        - scheme
+        - scss
+        - shellSession
+        - smali
+        - smalltalk
+        - smarty
+        - sml
+        - solidity
+        - solutionFile
+        - soy
+        - sparql
+        - splunkSpl
+        - sqf
+        - sql
+        - squirrel
+        - stan
+        - stylus
+        - swift
+        - systemd
+        - t4Cs
+        - t4Templating
+        - t4Vb
+        - tap
+        - tcl
+        - textile
+        - toml
+        - tremor
+        - tsx
+        - tt2
+        - turtle
+        - twig
+        - typescript
+        - typoscript
+        - unrealscript
+        - uorazor
+        - uri
+        - v
+        - vala
+        - vbnet
+        - velocity
+        - verilog
+        - vhdl
+        - vim
+        - visualBasic
+        - warpscript
+        - wasm
+        - webIdl
+        - wiki
+        - wolfram
+        - wren
+        - xeora
+        - xmlDoc
+        - xojo
+        - xquery
+        - yaml
+        - yang
+        - zig
+      supertitle:
+        type: string
+        description: Supertitle - OPTIONAL (eg. tricks with)
+        required: false
+      title:
+        type: string
+        description: Title - OPTIONAL (eg. Javascript Destructuring)
+        required: false
+      hashtags:
+        type: string
+        description: Hashtags - comma seperated list ("#javascript","#coding","#programming")
+        required: true
+
+jobs:
+
+  input_check:
+    name: "🚧 Validate Action Inputs"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "🚧 Test [name] input with regex"
+        uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: ${{ github.event.inputs.name }}
+          regex: '[a-zA-Z ]'
+
+      - name: "🚫 Deny invalid snippet [name] input"
+        if: ${{ steps.regex-match.outputs.match == '' }}
+        run: |
+          echo "Invalid snippet name input (example: My Cool Snippet)"
+          exit 1
+
+  upload_draft:
+    needs: [input_check]
+    name: "☁️ Upload Draft Snippet"
+    runs-on: ubuntu-latest
+    environment: admin
+
+    steps:
+      - name: "☁️ Check out Git Repository"
+        uses: actions/checkout@v2
+
+      - name: "Generate (metadata.json) file"
+        env:
+          NAME: ${{ github.event.inputs.name }}
+          DESC: ${{ github.event.inputs.description }}
+          LANG: ${{ github.event.inputs.language }}
+          SUPERTITLE: ${{ github.event.inputs.supertitle }}
+          TITLE: ${{ github.event.inputs.title }}
+          HASHTAGS: ${{ github.event.inputs.hashtags }}
+
+        run: |
+          cat <<EOT >> metadata.json
+            {
+              "name": "$NAME",
+              "description": "$DESC",
+              "hashtags": [
+                $HASHTAGS
+              ],
+              "language": "$LANG",
+              "header": {
+                "supertitle": "$SUPERTITLE",
+                "title": "$TITLE"
+              }
+            }
+          EOT
+          echo "$(<metadata.json )"
+
+      - name: "Generate (snippet.js) file"
+        run: |
+          echo -e "const mySnippet = \`\n${{ github.event.inputs.snippet }}\n\`;\nexport default mySnippet;" >> snippet.js
+          echo "$(<snippet.js )"
+
+      - name: "Generate slug from metadata name"
+        id : slug_generator
+        run: |
+          echo "::set-output name=slugname::$(echo -n "${{ github.event.inputs.name }}" | sed -e 's/[^[:alnum:]]/-/g' | tr -s '-' | tr A-Z a-z)"
+
+      - name: "🚧 Verify snippet DOES NOT exist in drafts folder"
+        run: test -d ./drafts/${{ steps.slug_generator.outputs.slugname }}/ && (echo ❌ Existing snippet found && exit 1) || echo "✅ No existing snippet folder"
+
+      - name: "Create folder in drafts from metadata name"
+        run: mkdir ./drafts/${{ steps.slug_generator.outputs.slugname }}
+
+      - name: "Move over files into draft folder"
+        run: |
+          cp ./metadata.json ./drafts/${{ steps.slug_generator.outputs.slugname }}
+          cp ./snippet.js ./drafts/${{ steps.slug_generator.outputs.slugname }}
+
+      - name: "🧽 Clean up temporary snippet files"
+        run: |
+          rm -f ./metadata.json
+          rm -f ./snippet.js
+
+      - name: "🚀 Commit [${{ github.event.inputs.name }}] snippet UPLOAD"
+        run: |
+          git config pull.rebase false
+          git pull
+          git add .
+          git config --global user.name "UploadDraftBot"
+          git config --global user.email "spencerbot@example.com"
+          git commit -m "🟢 [Automated] Upload draft snippet (${{ steps.slug_generator.outputs.slugname }})"
+
+      - name: "🚀 Push changes to repo"
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

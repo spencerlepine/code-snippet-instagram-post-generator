@@ -1,0 +1,111 @@
+name: Draft Generator Test
+
+on:
+  workflow_dispatch:
+    inputs:
+      snippet_name:
+        type: string
+        description: drafts/<snippet_folder_name>
+        required: true
+
+jobs:
+
+  generator_snippet:
+    name: "🏗 Test Snippet Generator"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "🚧 Test input with regex"
+        uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: ${{ github.event.inputs.snippet_name }}
+          regex: '[a-z-]'
+
+      - name: "🚫 Deny invalid snippet name input"
+        if: ${{ steps.regex-match.outputs.match == '' }}
+        run: |
+          echo "Invalid snippet name input (example: my-cool-snippet)"
+          exit 1
+
+      - name: "☁️ Check out Git Repository"
+        uses: actions/checkout@v2
+
+      - name: "🚧 Verify snippet exists in draft folder"
+        run: test -d ./drafts/${{ github.event.inputs.snippet_name }}/ && echo "✅ Folder exists" || (echo ❌ Folder not found && exit 1)
+
+      - name: "🚧 Verify snippet DOES NOT exist in output folder"
+        run: test -d ./snippets/${{ github.event.inputs.snippet_name }}/ && (echo ❌ Existing snippet found && exit 1) || echo "✅ No existing snippet folder"
+
+      - name: "🔧 Set up Node"
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+
+      - name: "⚡ Cache dependencies"
+        uses: actions/cache@v3
+        id: modules-cache
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+
+      - name: "📦 Install dependencies"
+        if: steps.modules-cache.outputs.cache-hit != 'true'
+        working-directory: ./generator
+        run: npm install
+
+      - name: "🔧 Create the [./generator/src/tmp] folder"
+        working-directory: ./generator/src/
+        run: mkdir tmp
+
+      - name: "🔧 Copy snippet draft into [./generator/src/tmp] folder"
+        run: cp -a ./drafts/${{ github.event.inputs.snippet_name }}/. ./generator/src/tmp/
+
+      - name: "🧪 Generate the snippet Screenshot"
+        working-directory: ./generator
+        run: npm run generate:screenshot --if-present
+
+      - name: "🔧 Create snippet output folder"
+        working-directory: ./generator/src/
+        run: |
+          mkdir output
+          cd output
+          mkdir tmp
+          cd ..
+          cp -a ./tmp/. ./output/tmp/
+
+      - name: "☁️ Upload snippet build to artifacts"
+        uses: actions/upload-artifact@v3
+        with:
+          name: snippet-output-${{ github.sha }}
+          path: ./generator/src/output
+          retention-days: 5
+
+      - name: "⬇️ Download the snippet build from artifacts"
+        uses: actions/download-artifact@v3
+        with:
+          name: snippet-output-${{ github.sha }}
+
+      - name: "🔎 Search for snippet output folder"
+        run: test -d ./tmp && echo "✅ Folder exists" || (echo ❌ Folder not found && exit 1)
+
+      - name: "🔧 Create snippets output folder"
+        run: mkdir -p snippets
+
+      - name: "🔧 Create output snippet folder"
+        run: mkdir -p ./snippets/${{ github.event.inputs.snippet_name }}
+
+      - name: "🚗 Copy snippet output into snippets folder"
+        run: cp -r ./tmp ./snippets/${{ github.event.inputs.snippet_name }}
+
+      - name: "⬇️ List output snippets folders"
+        run: cd snippets && ls
+
+      - name: "🧽 Clean up temporary snippet files"
+        run: |
+          rm -rf ./generator/src/output
+          rm -rf ./drafts/${{ github.event.inputs.snippet_name }}
