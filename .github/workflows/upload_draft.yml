@@ -11,6 +11,10 @@ on:
         type: string
         description: Snippet Name (eg. My Cool Snippet)
         required: true
+      description:
+        type: string
+        description: Snippet Description
+        required: true
       language:
         type: choice
         description: Language (eg. javascript)
