@@ -1,4 +1,4 @@
-name: Build Draft
+name: Draft Generator Test
 
 on:
   workflow_dispatch:
