@@ -14,9 +14,8 @@ env:
 jobs:
 
   generator_snippet:
-    name: "🏗 Generate Snippet"
+    name: "🏗 Test Snippet Generator"
     runs-on: ubuntu-latest
-    environment: admin
 
     if: github.ref == 'refs/heads/main'
 
@@ -52,6 +51,10 @@ jobs:
 
       - name: "🔧 Copy snippet draft into /tmp folder"
         run: cp -r ./drafts/${{ github.event.inputs.snippet_name }}/ ./generator/src/tmp
+
+      - name: "🧪 Generator Snippet Screenshot"
+        working-directory: ./generator
+        run: cd ./generator/src/tmp && ls -a
 
       - name: "🧪 Generator Snippet Screenshot"
         working-directory: ./generator
