@@ -3,6 +3,13 @@
 import React, { useRef, useEffect } from 'react';
 import useHighlightOptions from './SyntaxHighlight/useHighlightOptions';
 import SyntaxHighlight from './SyntaxHighlight/SyntaxHighlight';
+import LanguageIcon from './LanguageIcon/LanguageIcon';
+import Header from './Header/Header';
+import Footer from './Footer/Footer';
+import logo from '../assets/images/logo.png';
+
+import ColorScheme from 'color-scheme';
+import './App.css';
 
 // import html2canvas from "html2canvas";
 
@@ -29,7 +36,20 @@ import SyntaxHighlight from './SyntaxHighlight/SyntaxHighlight';
 
 // import Socials from './Socials/Socials';
 // import config from '../config';
-import './App.css';
+
+const generateColorTheme = () => {
+  const scm = new ColorScheme;
+  const hue = Math.floor(Math.random() * (100 - 0 + 1) + 0)
+  scm.from_hue(hue)
+    .scheme('triade')
+    .distance(0.1)
+    .add_complement(false)
+    .variation('pastel')
+    .web_safe(true);
+  const colors = scm.colors();
+  const [themeMainPrimary, , , themeColorSecondary] = colors
+  return [themeMainPrimary, themeColorSecondary]
+}
 
 const App = ({
   metadata,
@@ -58,10 +78,24 @@ const App = ({
 
   const shouldRenderHeader = (title || supertitle)
 
+  const [themeMainPrimary, themeColorSecondary] = generateColorTheme()
+  const styles = {
+    backgroundColor: `#${themeMainPrimary}`,
+  }
+
   return (
     <div className="App">
-      <div className="tidbit" ref={snippetRef}>
-        <SyntaxHighlight {...highlighterOptions} codeInput={code} />
+      <div className="tidbit" ref={snippetRef} style={styles}>
+        <LanguageIcon language={language} />
+        {shouldRenderHeader && (
+          <Header
+            supertitle={supertitle}
+            title={title}
+            logo={logo}
+          />
+        )}
+        <SyntaxHighlight {...highlighterOptions} codeInput={code} logo={shouldRenderHeader ? '' : logo} />
+        <Footer themeColorSecondary={themeColorSecondary} />
       </div>
     </div>
   );

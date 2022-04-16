@@ -12,6 +12,10 @@ See everything in action in the [demo video](<VIDEO_LINK>).
 ## Supported Languages:
 See [`languages.json`](./generator/src/constants/languages.json)
 
+
+## Resources
+- Icons from [Icons8](https://icons8.com/)
+- Syntax Highlighter: [react-syntax-highlighter](https://www.npmjs.com/package/react-syntax-highlighter)
 ## Generate Snippet w/ GitHub Actions
 
 ### Navigate to Actions Tab
@@ -130,3 +134,12 @@ Discover JavaScript object destructuring. A common way to cleanly extract proper
 #javascript #softwareengineer #coding #programming #developer #software #code
 ```
 
+# 🚀 Contributors
+
+- [Spencer Lepine](https://github.com/spencerlepine)
+  - 🏠 Blog [spencerlepine.com](https://www.spencerlepine.com)
+  - 😺 GitHub [@spencerlepine](https://github.com/spencerlepine)
+  - 🐦 Twitter [@spencerlepine](http://twitter.com/spencerlepine)
+  - 💼 [LinkedIn](https://www.linkedin.com/in/spencer-lepine)
+
+<a href="https://www.buymeacoffee.com/spencerlepine" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>

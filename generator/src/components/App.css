@@ -52,7 +52,7 @@ tt {
   flex-direction: column;
 
   max-height: 550px;
-  background-color: #92c5d0;
+  /* background-color: #92c5d0; */
 }
 
 .syntaxOptions, .appHeader, .tidbitOptions {
@@ -62,9 +62,42 @@ tt {
   margin: 1em;
 }
 
-.appHeader * {
-  padding: 1em;
-  margin: auto;
+.languageIcon, logo {
+  z-index: 99;
+  position: absolute;
+  top: 0.75em;
+  right: 0.75em;
+  height: 3.5em;
+  width: 3.5em;
+}
+
+.languageIcon svg {
+  height: 3.5em;
+  width: 3.5em;
+}
+
+.snippetHeader {
+  width: 550px;
+  position: relative;
+  display: flex;
+  background-color: #20231c;
+  height: 5em;
+  /* position: fixed; */
+  top: 0em;
+}
+
+.snippetHeader h5 {
+  font-size: large;
+  color: rgb(192, 192, 192);
+}
+
+.snippetHeader h2 {
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  margin: 0;
+  color: white;
 }
 
 .syntaxHighlighter {
@@ -72,7 +105,7 @@ tt {
   margin: auto !important;
   transform: translateY(-1em);
   width: fit-content;
-  padding: 3em 2em 1em 2em !important;
+  padding: 0em 2em 2em 2em !important;
   max-height: 520px;
 }
 
@@ -80,6 +113,7 @@ tt {
   margin: 0;
   padding: 0;
   width: 100%;
+  font-size: 1em;
   max-width: 490px;
   min-width: 300px;
   z-index: 10 !important;
@@ -89,48 +123,53 @@ pre {
   max-height: 440px;
 }
 
+.logo {
+  height: 5em;
+  width: 5em;
+  filter: drop-shadow();
+}
+
 .socialsFooter {
   position: absolute;
-  color: white;
+  color: rgb(0, 0, 0);
   width: 100%;
   display: flex;
   bottom: 0;
-  background-color: gray;
-}
-
-.socialsFooter .accounts {
-  display: flex;
-  margin: auto 2em;
+  height: 4em;
 }
 
 .socialsFooter .website {
   margin: auto 2em auto auto;
 }
 
-.socialsFooter img {
-  width: 25px;
-  height: 25px;
-  margin: auto 0.2em;
-  filter: invert(1) brightness(100);
-}
-
-#logo {
+.socialsFooter h3 {
+  font-size: 1.2em;
+  padding: 0.5em;
+  margin: 0;
   position: absolute;
-  width: 4em;
-  filter: drop-shadow();
-  height: 4em;
-  top: 0.2em;
-  right: 0.2em;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  color: rgba(0, 0, 0, 0.7);
+ text-shadow: 1px 0px 1px rgba(255, 255, 255, 0.2);
 }
 
-button {
-  background-color: #4CAF50; /* Green */
-  border: none;
-  margin: 0.5em 1em;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+.socialsFooter svg {
+  height: 2.5em;
+  width: 2.5em;
+  filter: invert(100%) contrast(100%) brightness(0%) opacity(50%)
+}
+
+
+.boxLogo {
+  height: 4em;
+  width: 4em;
+  border-radius: 50%;
+  border: 4px groove white;
+  background-color: rgb(43, 43, 43);
+  position: absolute;
+  top: -2.5em;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
 }

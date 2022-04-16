@@ -101,7 +101,7 @@ jobs:
         run: mkdir -p ./snippets/${{ github.event.inputs.snippet_name }}
 
       - name: "🚗 Copy snippet output into snippets folder"
-        run: cp -r ./tmp ./snippets/${{ github.event.inputs.snippet_name }}
+        run: cp -r ./tmp/. ./snippets/${{ github.event.inputs.snippet_name }}
 
       - name: "⬇️ List output snippets folders"
         run: cd snippets && ls

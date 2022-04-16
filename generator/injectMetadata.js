@@ -11,7 +11,8 @@ const {
   description,
   hashtags,
 } = metadata
-const slugName = (name.replace(" ", "-")).toLowerCase()
+const slugName = (name.replaceAll(" ", "-")).toLowerCase()
+console.log(name, slugName)
 
 const output = {
   ...metadata,
