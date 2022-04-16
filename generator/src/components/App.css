@@ -1,0 +1,136 @@
+.codeForm {
+  margin: 1em auto !important;
+  width: 80vw;
+  max-width: 700px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #eee;
+  color: #484644;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: fit-content;
+}
+
+h1 {
+  font-size: calc(2rem + 3vw);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin: 0 0 0.25em 0;
+  opacity: 0.5;
+}
+
+/* .App {
+  padding: 2em;
+  margin: 2em;
+} */
+
+/* http://code.iamkate.com/html-and-css/fixing-browsers-broken-monospace-font-handling/ */
+pre,
+code,
+textarea,
+kbd,
+samp,
+tt {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.tidbit {
+  position: relative;
+  width: 550px;
+  height: 550px;
+
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+
+  max-height: 550px;
+  background-color: #92c5d0;
+}
+
+.syntaxOptions, .appHeader, .tidbitOptions {
+  display: flex;
+  border: 2px solid rgb(205, 205, 205);
+  width: fit-content;
+  margin: 1em;
+}
+
+.appHeader * {
+  padding: 1em;
+  margin: auto;
+}
+
+.syntaxHighlighter {
+  position: relative;
+  margin: auto !important;
+  transform: translateY(-1em);
+  width: fit-content;
+  padding: 3em 2em 1em 2em !important;
+  max-height: 520px;
+}
+
+.codeHighlight {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 490px;
+  min-width: 300px;
+  z-index: 10 !important;
+}
+
+pre {
+  max-height: 440px;
+}
+
+.socialsFooter {
+  position: absolute;
+  color: white;
+  width: 100%;
+  display: flex;
+  bottom: 0;
+  background-color: gray;
+}
+
+.socialsFooter .accounts {
+  display: flex;
+  margin: auto 2em;
+}
+
+.socialsFooter .website {
+  margin: auto 2em auto auto;
+}
+
+.socialsFooter img {
+  width: 25px;
+  height: 25px;
+  margin: auto 0.2em;
+  filter: invert(1) brightness(100);
+}
+
+#logo {
+  position: absolute;
+  width: 4em;
+  filter: drop-shadow();
+  height: 4em;
+  top: 0.2em;
+  right: 0.2em;
+}
+
+button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  margin: 0.5em 1em;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
