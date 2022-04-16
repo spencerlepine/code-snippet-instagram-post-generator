@@ -1,7 +1,7 @@
 name: Build Draft
 
 on:
-  workflow_dispath:
+  workflow_dispatch:
     inputs:
       snippet_name:
         type: string
@@ -58,14 +58,14 @@ jobs:
       - name: "☁️ Upload snippet build to artifacts"
         uses: actions/upload-artifact@v3
         with:
-          name: snippet-output-${{ github. }}
+          name: snippet-output-${{ github.sha }}
           path: ./generator/src/tmp
           retention-days: 5
 
       - name: "⬇️ Download the client test coverage report"
         uses: actions/download-artifact@v3
         with:
-          name: snippet-output-${{ github. }}
+          name: snippet-output-${{ github.sha }}
 
       - name: "🔎 Search for snippet output folder"
         run: test -d ./tmp && echo "✅ Folder exists" || (echo ❌ Folder not found && exit 1)
