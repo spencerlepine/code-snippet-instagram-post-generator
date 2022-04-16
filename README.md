@@ -48,9 +48,13 @@ After running the `Draft Generator Test` action, download the artifact
 ![Download Sample Snippet](./action-screenshots/draft_generator_test.png)
 
 ### Run the `Generate Snippet` Action
-Acceses the `/drafts` folder, generates the snippet image, save to `/snippets` folder
+Accesses the `/drafts` folder, generates the snippet image, save to `/snippets` folder
 
-![Generate Snippet](./action-screenshots/snippet_generate.png)
+![Generate Snippet](./action-screenshots/generate_snippet.png)
+
+![Snippet Commit](./action-screenshots/snippet_commit.png)
+
+![Snippet Folder](./action-screenshots/snippets_folder.png)
 
 ### Run the `Delete Published Snippet` Action
 Removes snippet from `/snippets` folder if found
