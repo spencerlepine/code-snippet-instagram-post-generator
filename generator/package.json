@@ -1,0 +1,39 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "inject:metadata": "node injectMetadata.js",
+    "generate:screenshot": "(nohup npm start 2>/dev/null 1>/dev/null&) && sleep 10 && npm run test:prebuild && npm run inject:metadata && node puppeteerScreenshot.js && npm run test:postbuild",
+    "test:prebuild": "jest snippetTmpInput.test.js",
+    "test:postbuild": "jest snippetTmpOutput.test.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bulma": "^0.9.3",
+    "html2canvas": "^1.4.1",
+    "jest": "^27.5.1",
+    "puppeteer": "^13.5.2",
+    "puppeteer-core": "^13.5.2",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "react-scripts": "^5.0.1",
+    "react-syntax-highlighter": "^15.5.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
