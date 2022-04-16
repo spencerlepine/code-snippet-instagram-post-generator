@@ -52,7 +52,7 @@ jobs:
       - name: "🔧 Copy snippet draft into /tmp folder"
         run: cp -r ./drafts/${{ github.event.inputs.snippet_name }}/ ./generator/src/tmp
 
-      - name: "🧪 Generator Snippet Screenshot"
+      - name: "? Look inside the tmp folder"
         working-directory: ./generator
         run: cd ./generator/src/tmp && ls -a
 
