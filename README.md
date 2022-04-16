@@ -1,20 +1,37 @@
-# Code Snippets
-Generating and storing code snippets for various tips and tricks
+# Code Snippet Generator
+Generating and storing code snippets for various tips and tricks. Upload snippet metadata, then generate an image automatically with GitHub Actions.
 
+## Demo Video
+See everything in action in the [demo video](<VIDEO_LINK>).
+
+[![Demo Youtube Video](./actions-screenshots/youtube_thumbnail.png)](<VIDEO_LINK>)
+
+## Example Snippet:
 ![Example Tidbit](./snippets/example-snippet/javascript-destructuring-snippet.png)
+
+## Supported Languages:
+See [`languages.json`](./generator/src/constants/languages.json)
 
 ## Generate Snippet w/ GitHub Actions
 
+### Navigate to Actions Tab
+Trigger manual workflow runs from the Actions tab. Click 'run workflow'
+
+![Actions Tab](./action-screenshots/actions_tab.png)
+
 ### Admin Workflow Approval
 Approve these actions after triggering
-![Admin Workflow Approval](./action-screenshots/action_approval.png)
+
+![Admin Workflow Approval](./action-screenshots/approve_workflow.png)
+
+![Admin Workflow Approval](./action-screenshots/admin_approve.png)
 
 ### Run the `Upload Draft Snippet` Action
 Makes folder in the `/drafts` with metadata inputs
 
 ![Upload Draft Snippet](./action-screenshots/upload_draft.png)
 
-### `Delete Draft Snippet` Action
+### Run the `Delete Draft Snippet` Action
 Removes snippet from `/drafts` folder if found
 
 ![Delete Draft Snippet](./action-screenshots/delete_draft.png)
@@ -22,20 +39,25 @@ Removes snippet from `/drafts` folder if found
 ### Run the `Draft Generator Test` Action
 Acceses the `/drafts` folder and attempts to generate a snippet
 
-![Draft Generator Test](./action-screenshots/draft_generator_test.png)
+![Draft Generator Test](./action-screenshots/test_generator.png)
+
+
+### Download Sample Snippet
+After running the `Draft Generator Test` action, download the artifact
+
+![Download Sample Snippet](./action-screenshots/draft_generator_test.png)
 
 ### Run the `Generate Snippet` Action
 Acceses the `/drafts` folder, generates the snippet image, save to `/snippets` folder
 
 ![Generate Snippet](./action-screenshots/snippet_generate.png)
 
-### `Delete Published Snippet` Action
+### Run the `Delete Published Snippet` Action
 Removes snippet from `/snippets` folder if found
 
 ![Delete Published Snippet](./action-screenshots/delete_published.png)
-## Supported Languages:
-See [`languages.json`](./generator/src/constants/languages.json)
 
+---
 ## Run Snippet Generator Locally
 Run the following commands to make snippet draft, and generate a snippet image:
 ```sh
@@ -73,7 +95,7 @@ Run the following commands to make snippet draft, and generate a snippet image:
 ```
 
 ### Generates snippet image
-![Example Tidbit](./drafts/example-snippet/javascript-destructuring-snippet.png)
+![Example Tidbit](./snippets/example-snippet/javascript-destructuring-snippet.png)
 
 ### Saves output metadata
 ```diff
