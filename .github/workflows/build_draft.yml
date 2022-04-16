@@ -1,7 +1,7 @@
 name: Build Draft
 
 on:
-  workflow_dispath:
+  workflow_dispatch:
     inputs:
       snippet_name:
         type: string
