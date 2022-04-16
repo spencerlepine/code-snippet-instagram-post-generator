@@ -64,7 +64,7 @@ jobs:
           path: ./generator/src/tmp
           retention-days: 5
 
-      - name: "⬇️ Download the client test coverage report"
+      - name: "⬇️ Download the snippet build"
         uses: actions/download-artifact@v3
         with:
           name: snippet-output-${{ github.sha }}
@@ -78,11 +78,11 @@ jobs:
       - name: "🧽 Clean up snippet draft"
         run: rm -f ./drafts/${{ github.event.inputs.snippet_name }}
 
-      - name: "🚀 Commit ${{ github.event.inputs.snippet_name }} snippet build"
-        run: |
-          git config pull.rebase false
-          git pull
-          git add .
-          git config --global user.name "SpencerBot"
-          git config --global user.email "spencerbot@example.com"
-          git commit -m "🚀 [Automated] Generator new snippet (${{ github.event.inputs.snippet_name }})"
+      # - name: "🚀 Commit ${{ github.event.inputs.snippet_name }} snippet build"
+      #   run: |
+      #     git config pull.rebase false
+      #     git pull
+      #     git add .
+      #     git config --global user.name "SpencerBot"
+      #     git config --global user.email "spencerbot@example.com"
+      #     git commit -m "🚀 [Automated] Generator new snippet (${{ github.event.inputs.snippet_name }})"
