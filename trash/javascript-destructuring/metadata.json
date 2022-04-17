@@ -1,12 +1,1 @@
-  {
-    "name": "Javascript Destructuring",
-    "description": "Discover JavaScript object destructuring. A common way to cleanly extract properties from objects.",
-    "hashtags": [
-      "#javascript","#coding","#programming"
-    ],
-    "language": "javascript",
-    "header": {
-      "supertitle": "USING",
-      "title": "Javascript Destructuring"
-    }
-  }
+{"name":"Javascript Destructuring","description":"Discover JavaScript object destructuring. A common way to cleanly extract properties from objects.","hashtags":["#javascript","#coding","#programming"],"language":"javascript","header":{"supertitle":"USING","title":"Javascript Destructuring"},"image_file":"javascript-destructuring-snippet.png","slug":"javascript-destructuring","date":"2022-04-17T16:01:03.726Z"}
