@@ -2,9 +2,10 @@
 Generating and storing code snippets for various tips and tricks. Upload snippet metadata, then generate an image automatically with GitHub Actions.
 
 ## Demo Video
-See everything in action in the [demo video](<VIDEO_LINK>).
+See everything in action in the [demo video](https://www.youtube.com/watch?v=btBxWrSrr80).
 
-[![Demo Youtube Video](./actions-screenshots/youtube_thumbnail.png)](<VIDEO_LINK>)
+[![Demo Youtube Video](./action-screenshots/youtube_thumbnail.png)
+](https://www.youtube.com/watch?v=btBxWrSrr80)
 
 ## Example Snippet:
 ![Example Tidbit](./snippets/snippet-example/javascript-destructure-snippet.png)
