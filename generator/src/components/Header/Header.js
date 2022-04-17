@@ -14,7 +14,7 @@ const Header = (props) => {
 
       <div className="ml-6 is-inline headerTitle">
         <h5 className="pt-2">{supertitle}</h5>
-        <h2 className={`${supertitle ? 'pt-3' : ''} is-size-4 has-text-weight-semibold	`}>{title}</h2>
+        <h2 className={`${supertitle ? 'pt-3' : ''} has-text-weight-semibold	`}>{title}</h2>
       </div>
     </div>
   );

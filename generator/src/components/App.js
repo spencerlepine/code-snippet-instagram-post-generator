@@ -39,7 +39,7 @@ import './App.css';
 
 const generateColorTheme = () => {
   const scm = new ColorScheme;
-  const hue = Math.floor(Math.random() * (100 - 0 + 1) + 0)
+  const hue = Math.floor(Math.random() * (360 - 0 + 1) + 0)
   scm.from_hue(hue)
     .scheme('triade')
     .distance(0.1)
@@ -86,7 +86,7 @@ const App = ({
   return (
     <div className="App">
       <div className="tidbit" ref={snippetRef} style={styles}>
-        <LanguageIcon language={language} />
+        {shouldRenderHeader && <LanguageIcon language={language} />}
         {shouldRenderHeader && (
           <Header
             supertitle={supertitle}

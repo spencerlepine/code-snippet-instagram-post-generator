@@ -9,8 +9,8 @@ const generateScreenshot = async () => {
   const page = await browser.newPage();
 
   await page.setViewport({
-    width: 550,
-    height: 550,
+    width: 1080,
+    height: 1080,
   });
 
   await page.goto('http://localhost:3000');

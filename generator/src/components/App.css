@@ -1,9 +1,3 @@
-.codeForm {
-  margin: 1em auto !important;
-  width: 80vw;
-  max-width: 700px;
-}
-
 * {
   box-sizing: border-box;
 }
@@ -16,19 +10,6 @@ body {
   padding: 0;
   width: fit-content;
 }
-
-h1 {
-  font-size: calc(2rem + 3vw);
-  letter-spacing: -0.05em;
-  line-height: 1;
-  margin: 0 0 0.25em 0;
-  opacity: 0.5;
-}
-
-/* .App {
-  padding: 2em;
-  margin: 2em;
-} */
 
 /* http://code.iamkate.com/html-and-css/fixing-browsers-broken-monospace-font-handling/ */
 pre,
@@ -43,56 +24,57 @@ tt {
 
 .tidbit {
   position: relative;
-  width: 550px;
-  height: 550px;
+  width: 1080px;
+  height: 1080px;
 
   display: flex;
   justify-content: center;
   align-content: center;
   flex-direction: column;
 
-  max-height: 550px;
+  max-height: 1080px;
   /* background-color: #92c5d0; */
 }
 
 .syntaxOptions, .appHeader, .tidbitOptions {
   display: flex;
-  border: 2px solid rgb(205, 205, 205);
+  border: 4px solid rgb(205, 205, 205);
   width: fit-content;
-  margin: 1em;
+  margin: 2em;
 }
 
 .languageIcon, logo {
   z-index: 99;
   position: absolute;
-  top: 0.75em;
-  right: 0.75em;
-  height: 3.5em;
-  width: 3.5em;
+  top: 1.5em;
+  right: 1.5em;
+  height: 7em;
+  width: 7em;
 }
 
 .languageIcon svg {
-  height: 3.5em;
-  width: 3.5em;
+  height: 7em;
+  width: 7em;
 }
 
 .snippetHeader {
-  width: 550px;
+  width: 1080px;
   position: relative;
   display: flex;
   background-color: #20231c;
-  height: 5em;
+  height: 10em;
   /* position: fixed; */
   top: 0em;
 }
 
 .snippetHeader h5 {
-  font-size: large;
+  font-size: 2.5em;
   color: rgb(192, 192, 192);
 }
 
 .snippetHeader h2 {
   position: absolute;
+  font-size: 3.5em;
   top: 50%;
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
@@ -103,29 +85,29 @@ tt {
 .syntaxHighlighter {
   position: relative;
   margin: auto !important;
-  transform: translateY(-1em);
+  transform: translateY(-2em);
   width: fit-content;
-  padding: 0em 2em 2em 2em !important;
-  max-height: 520px;
+  padding: 0em 4em 4em 4em !important;
+  max-height: 1040px;
 }
 
 .codeHighlight {
   margin: 0;
   padding: 0;
   width: 100%;
-  font-size: 1em;
-  max-width: 490px;
-  min-width: 300px;
+  font-size: 2em;
+  max-width: 980px;
+  min-width: 600px;
   z-index: 10 !important;
 }
 
 pre {
-  max-height: 440px;
+  max-height: 880px;
 }
 
 .logo {
-  height: 5em;
-  width: 5em;
+  height: 10em;
+  width: 10em;
   filter: drop-shadow();
 }
 
@@ -135,17 +117,18 @@ pre {
   width: 100%;
   display: flex;
   bottom: 0;
-  height: 4em;
+  height: 8em;
 }
 
 .socialsFooter .website {
-  margin: auto 2em auto auto;
+  margin: auto 4em auto auto;
 }
 
 .socialsFooter h3 {
-  font-size: 1.2em;
-  padding: 0.5em;
+  font-size: 2.6em;
+  padding: 1em;
   margin: 0;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   position: absolute;
   top: 50%;
   -ms-transform: translateY(-50%);
@@ -155,20 +138,24 @@ pre {
 }
 
 .socialsFooter svg {
-  height: 2.5em;
-  width: 2.5em;
+  height: 5em;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 5em;
   filter: invert(100%) contrast(100%) brightness(0%) opacity(50%)
 }
 
 
 .boxLogo {
-  height: 4em;
-  width: 4em;
+  height: 8em;
+  width: 8em;
   border-radius: 50%;
-  border: 4px groove white;
+  border: 8px groove white;
   background-color: rgb(43, 43, 43);
   position: absolute;
-  top: -2.5em;
+  top: -5em;
   left: 50%;
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
