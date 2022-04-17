@@ -1,3 +1,0 @@
-Javascript Destructuring
-Discover JavaScript object destructuring. A common way to cleanly extract properties from objects.
-#javascript #coding #programming

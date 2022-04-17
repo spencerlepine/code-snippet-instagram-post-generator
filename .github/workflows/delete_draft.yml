@@ -59,11 +59,11 @@ jobs:
       - name: "🚧 Verify snippet exists folder"
         run: test -d ./drafts/${{ github.event.inputs.snippet_name }}/ && echo "✅ Folder exists" || (echo ❌ Folder not found && exit 1)
 
-      - name: "🚗 Move snippet folder to trash"
-        run: |
-          mkdir -p trash
-          mkdir -p ./trash/${{ github.event.inputs.snippet_name }}
-          cp -a ./drafts/${{ github.event.inputs.snippet_name }}/. ./trash/${{ github.event.inputs.snippet_name }}
+      # - name: "🚗 Move snippet folder to trash"
+      #   run: |
+      #     mkdir -p trash
+      #     mkdir -p ./trash/${{ github.event.inputs.snippet_name }}
+      #     cp -a ./drafts/${{ github.event.inputs.snippet_name }}/. ./trash/${{ github.event.inputs.snippet_name }}
 
       - name: "❌ Delete the snippet folder"
         run: |
