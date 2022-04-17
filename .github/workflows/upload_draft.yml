@@ -330,6 +330,17 @@ jobs:
           echo "Invalid snippet name input (example: My Cool Snippet)"
           exit 1
 
+      - name: "☁️ Check out Git Repository"
+        uses: actions/checkout@v2
+
+      - name: "Generate slug from metadata name"
+        id : slug_generator_test
+        run: |
+          echo "::set-output name=slugname::$(echo -n "${{ github.event.inputs.name }}" | sed -e 's/[^[:alnum:]]/-/g' | tr -s '-' | tr A-Z a-z)"
+
+      - name: "🚧 Verify snippet DOES NOT exist in drafts folder"
+        run: test -d ./drafts/${{ steps.slug_generator_test.outputs.slugname }}/ && (echo ❌ Existing snippet found && exit 1) || echo "✅ No existing snippet folder"
+
   upload_draft:
     needs: [input_check]
     name: "☁️ Upload Draft Snippet"

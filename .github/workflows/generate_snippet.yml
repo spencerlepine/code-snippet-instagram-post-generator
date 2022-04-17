@@ -9,8 +9,35 @@ on:
         required: true
 
 jobs:
+  input_check:
+    name: "🚧 Validate Action Inputs"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "🚧 Test [snippet_name] input with regex"
+        uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: ${{ github.event.inputs.snippet_name }}
+          regex: '[a-z-]'
+
+      - name: "🚫 Deny invalid snippet [snippet_name] input"
+        if: ${{ steps.regex-match.outputs.match == '' }}
+        run: |
+          echo "Invalid snippet folder name"
+          exit 1
+
+      - name: "☁️ Check out Git Repository"
+        uses: actions/checkout@v2
+
+      - name: "🚧 Verify snippet exists in draft folder"
+        run: test -d ./drafts/${{ github.event.inputs.snippet_name }}/ && echo "✅ Folder exists" || (echo ❌ Folder not found && exit 1)
+
+      - name: "🚧 Verify snippet DOES NOT exist in output folder"
+        run: test -d ./snippets/${{ github.event.inputs.snippet_name }}/ && (echo ❌ Existing snippet found && exit 1) || echo "✅ No existing snippet folder"
 
   generator_snippet:
+    needs: [input_check]
     name: "🏗 Test Snippet Generator"
     runs-on: ubuntu-latest
     environment: admin
