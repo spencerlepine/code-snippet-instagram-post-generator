@@ -5,9 +5,9 @@
 - Replace the Logo: [`logo.png`](./generator/assets/images/logo.png)
 
 ## Admin Envriroment
-GitHub Actions is referencing the `admin` enviroment with protected permissions. This requires the owner to approve a workflow run.
+GitHub Actions is referencing the `admin` environment with protected permissions. This requires the owner to approve a workflow run.
 
 #### Steps
-- Navigate to Repository `Settings > Enviroments`
-- Create a new enviroment called `admin`
+- Navigate to Repository `Settings > Environments`
+- Create a new environment called `admin`
 - *Check* "Require reviewers"

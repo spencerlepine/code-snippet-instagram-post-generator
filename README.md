@@ -42,7 +42,7 @@ Removes snippet from `/drafts` folder if found
 ![Delete Draft Snippet](./action-screenshots/delete_draft.png)
 
 ### Run the `Draft Generator Test` Action
-Acceses the `/drafts` folder and attempts to generate a snippet
+Accesses the `/drafts` folder and attempts to generate a snippet
 
 ![Draft Generator Test](./action-screenshots/test_generator.png)
 
